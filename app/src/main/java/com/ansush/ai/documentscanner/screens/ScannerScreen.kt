@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner.screens
+package com.ansush.ai.documentscanner.screens
 
 import android.app.Activity
 import android.net.Uri
@@ -32,7 +32,7 @@ import coil.compose.AsyncImage
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
-import `in`.ansush.ai.documentscanner.AIDocScannerApp
+import com.ansush.ai.documentscanner.AIDocScannerApp
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream

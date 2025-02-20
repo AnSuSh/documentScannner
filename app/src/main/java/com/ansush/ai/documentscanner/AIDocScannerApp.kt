@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner
+package com.ansush.ai.documentscanner
 
 import android.app.Application
 import android.os.Build

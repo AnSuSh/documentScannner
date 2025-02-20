@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner
+package com.ansush.ai.documentscanner
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done

@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner.screens
+package com.ansush.ai.documentscanner.screens
 
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
-import `in`.ansush.ai.documentscanner.BuildConfig
+import com.ansush.ai.documentscanner.BuildConfig
 import java.io.File
 
 @Composable

@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner
+package com.ansush.ai.documentscanner
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation

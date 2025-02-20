@@ -1,12 +1,12 @@
-package `in`.ansush.ai.documentscanner
+package com.ansush.ai.documentscanner
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import `in`.ansush.ai.documentscanner.screens.ScannedScreen
-import `in`.ansush.ai.documentscanner.screens.ScannerScreen
+import com.ansush.ai.documentscanner.screens.ScannedScreen
+import com.ansush.ai.documentscanner.screens.ScannerScreen
 
 @Composable
 fun BottomNavGraph(

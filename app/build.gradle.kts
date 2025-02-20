@@ -12,11 +12,11 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    namespace = "in.ansush.ai.documentscanner"
+    namespace = "com.ansush.ai.documentscanner"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "in.ansush.ai.documentscanner"
+        applicationId = "com.ansush.ai.documentscanner"
         minSdk = 24
         targetSdk = 35
         versionCode = 5
@@ -48,7 +48,7 @@ android {
             multiDexEnabled = true
             signingConfig = signingConfigs.getByName("release")
 
-            buildConfigField("String", "PROVIDER_AUTHORITY", "\"in.ansush.ai.documentscanner.fileprovider\"")
+            buildConfigField("String", "PROVIDER_AUTHORITY", "\"com.ansush.ai.documentscanner.fileprovider\"")
         }
         debug {
             isDebuggable = true
@@ -58,7 +58,7 @@ android {
             versionNameSuffix = ".debug"
             applicationIdSuffix = ".debug"
 
-            buildConfigField("String", "PROVIDER_AUTHORITY", "\"in.ansush.ai.documentscanner.debug.fileprovider\"")
+            buildConfigField("String", "PROVIDER_AUTHORITY", "\"com.ansush.ai.documentscanner.debug.fileprovider\"")
         }
     }
     compileOptions {

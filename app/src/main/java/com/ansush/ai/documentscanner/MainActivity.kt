@@ -1,9 +1,9 @@
-package `in`.ansush.ai.documentscanner
+package com.ansush.ai.documentscanner
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import `in`.ansush.ai.documentscanner.ui.theme.DocumentScannerTheme
+import com.ansush.ai.documentscanner.ui.theme.DocumentScannerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

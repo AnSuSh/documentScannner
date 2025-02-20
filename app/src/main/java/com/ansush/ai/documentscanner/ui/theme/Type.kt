@@ -1,4 +1,4 @@
-package `in`.ansush.ai.documentscanner.ui.theme
+package com.ansush.ai.documentscanner.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
