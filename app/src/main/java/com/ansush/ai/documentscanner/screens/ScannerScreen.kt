@@ -29,10 +29,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
+import com.ansush.ai.documentscanner.AIDocScannerApp
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
-import com.ansush.ai.documentscanner.AIDocScannerApp
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -145,7 +145,7 @@ fun ScannerScreen(paddingValues: PaddingValues) {
                 end.linkTo(parent.end, margin = 16.dp)
             }
         ) {
-            Text(text = "Scan PDF")
+            Text(text = "Scan")
         }
     }
 }

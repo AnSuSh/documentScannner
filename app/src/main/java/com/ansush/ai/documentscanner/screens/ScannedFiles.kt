@@ -1,17 +1,24 @@
 package com.ansush.ai.documentscanner.screens
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -49,8 +56,8 @@ fun ScannedScreen(paddingValues: PaddingValues) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = paddingValues.calculateBottomPadding())
-                .padding(16.dp), // Add padding for better visual spacing
+                .windowInsetsPadding(WindowInsets.systemBars)
+                .padding(8.dp), // Add padding for better visual spacing
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -83,50 +90,77 @@ fun ScannedScreen(paddingValues: PaddingValues) {
 fun ScannedFileItem(file: File, onDelete: (Boolean) -> Unit) {
     val context = LocalContext.current
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp), // Add padding for better visual separation
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
+    Surface(
+        elevation = 4.dp,
+        modifier = Modifier.clickable {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val pdfUri = getPdfUri(context, file)
+            intent.setDataAndType(pdfUri, "application/pdf")
+            intent.flags =
+                Intent.FLAG_GRANT_READ_URI_PERMISSION // Grant read permission to the viewer
+
+            try {
+                context.startActivity(intent, null)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }) {
+        Row(
             modifier = Modifier
-                .weight(9f),
-            overflow = TextOverflow.Ellipsis,
-            text = file.name
-        )
-        IconButton(
-            modifier = Modifier
-                .weight(1f),
-            onClick = {
-                // Share the pdf file
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "application/pdf"
-                val shareableFileUri = FileProvider.getUriForFile(
-                    context,
-                    BuildConfig.PROVIDER_AUTHORITY,
-                    file
+                .fillMaxWidth()
+                .padding(8.dp), // Add padding for better visual separation
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                modifier = Modifier
+                    .weight(9f),
+                overflow = TextOverflow.Ellipsis,
+                text = file.name
+            )
+            IconButton(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .weight(1f),
+                onClick = {
+                    // Share the pdf file
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "application/pdf"
+                    val shareableFileUri = getPdfUri(context, file)
+                    intent.putExtra(Intent.EXTRA_STREAM, shareableFileUri)
+                    context.startActivity(Intent.createChooser(intent, "Share File"))
+                }) {
+                Icon(
+                    imageVector = Icons.Default.Share,
+                    contentDescription = "Share the File"
                 )
-                intent.putExtra(Intent.EXTRA_STREAM, shareableFileUri)
-                context.startActivity(Intent.createChooser(intent, "Share File"))
-            }) {
-            Icon(
-                imageVector = Icons.Default.Share,
-                contentDescription = "Share the File"
-            )
+            }
+            IconButton(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .weight(1f),
+                onClick = {
+                    val isDeleted = file.delete()
+                    onDelete(isDeleted)
+                }) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete the File"
+                )
+            }
         }
-        IconButton(
-            modifier = Modifier
-                .weight(1f),
-            onClick = {
-                val isDeleted = file.delete()
-                onDelete(isDeleted)
-            }) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete the File"
-            )
-        }
+    }
+}
+
+fun getPdfUri(context: Context, pdfFile: File): Uri? {
+    return try {
+        FileProvider.getUriForFile(
+            context,
+            BuildConfig.PROVIDER_AUTHORITY,
+            pdfFile
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
     }
 }
