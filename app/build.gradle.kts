@@ -19,8 +19,8 @@ android {
         applicationId = "com.ansush.ai.documentscanner"
         minSdk = 24
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.5.1"
+        versionCode = 7
+        versionName = "0.5.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -47,6 +47,8 @@ android {
             isDebuggable = false
             multiDexEnabled = true
             signingConfig = signingConfigs.getByName("release")
+
+            ndk.debugSymbolLevel = "symbol_table"
 
             buildConfigField("String", "PROVIDER_AUTHORITY", "\"com.ansush.ai.documentscanner.fileprovider\"")
         }
